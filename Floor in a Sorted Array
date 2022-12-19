@@ -1,0 +1,39 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+                Scanner sc=new Scanner(System.in);
+                int n=sc.nextInt();
+                int x=sc.nextInt();
+                int arr[]=new int [n];
+                for(int i=0; i<n; i++)
+                        {
+                                arr[i]=sc.nextInt();
+                        }
+                System.out.println(floorSearch(arr, n, x));
+                
+	}
+        static int floorSearch(int arr[], int n, int x)
+    {
+        // If last element is smaller than x
+        if (x >= arr[n - 1])
+            return n - 1;
+ 
+        // If first element is greater than x
+        if (x < arr[0])
+            return -1;
+ 
+        // Linearly search for the first element
+        // greater than x
+        for (int i = 1; i < n; i++)
+            if (arr[i] > x)
+                return (i - 1);
+ 
+        return -1;
+    }
+}
