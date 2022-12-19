@@ -1,0 +1,56 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+	public static void main (String[] args) throws java.lang.Exception	{
+                Scanner sc = new Scanner(System.in);
+                int n = sc.nextInt();
+                int pages[] = new int[n];
+                // l -> pages of thickest book
+                // r -> sum of pages of all books
+                long l = -1, r = 0;
+                for(int i = 0; i < n; i++){
+                        pages[i] = sc.nextInt();
+                        l = Math.max(l, pages[i]);
+                        r += pages[i];
+                }
+                int b = sc.nextInt();
+                if(n < b){ // # of Books < # of Students
+                        System.out.println(-1);
+                        return;
+                }
+                long ans = l;
+                while(l <= r){
+                        long mid = (l + r) / 2;
+                        if(isValid(pages, b, mid)){
+                                ans = mid;
+                                r = mid - 1;
+                        }
+                        else {
+                                l = mid + 1;
+                        }
+                }
+                System.out.println(ans);
+	}
+
+        // function to check if its possible to make a distribution,
+        // where maximum number of pages allowed per student is
+        // mid (passed from main function above)
+        static boolean isValid(int pages[], int b, long maxPagesAllowed){
+                // O(n) runtime
+                long students = 1, currentSum = 0;
+                for(int i = 0; i < pages.length; i++){
+                        currentSum += pages[i];
+                        if(currentSum > maxPagesAllowed){
+                                students++;
+                                currentSum = pages[i];
+                        }
+                        if(students > b)
+                                return false;
+                }
+                return true;
+        }
+}
+
