@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+                Scanner sc=new Scanner(System.in);
+                int n=sc.nextInt();
+                int arr[]=new int[n];
+                for(int i=0; i<n; i++)
+                        {
+                                arr[i]=sc.nextInt();
+                        }
+                int target=sc.nextInt();
+                System.out.print(first(arr, target)+" ");
+                System.out.println(last(arr, target));
+	}
+        
+        static  int first(int arr[], int target)
+        {
+                int n=arr.length;
+                int ans=-1;
+                int l=0; 
+                int r=n-1;
+                int mid;
+                while(l<=r)
+                        {
+                                mid=(l+r)/2;
+                                if(arr[mid]>target)
+                                {
+                                        r=mid-1;
+                                }
+                                if(arr[mid]<target)
+                                {
+                                        l=mid+1;
+                                }
+                                if(arr[mid]==target)
+                                {
+                                        ans=mid;
+                                        r=mid-1;
+                                }
+                        }
+                return ans;
+        }
+        static int last(int arr[], int target)
+        {
+                int n=arr.length;
+                int ans=-1;
+                int l=0; 
+                int r=n-1;
+                int mid;
+                while(l<=r)
+                        {
+                                mid=(l+r)/2;
+                                if(arr[mid]>target)
+                                {
+                                        r=mid-1;
+                                }
+                                if(arr[mid]<target)
+                                {
+                                        l=mid+1;
+                                }
+                                if(arr[mid]==target)
+                                {
+                                        ans=mid;
+                                        l=mid+1;
+                                }
+                        }
+                return ans;
+        }
+}
